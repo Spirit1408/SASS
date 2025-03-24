@@ -1,7 +1,7 @@
 // @use "../utils/mixins";
 // @use "../utils/variables" as v;
 
-@use "../utils/styles-forwarded" as s;
+@use "../utilities/styles-forwarded" as s;
 
 .badge {
     @include s.badge-base();
