@@ -1,0 +1,22 @@
+// @use "../utils/mixins";
+// @use "../utils/variables" as v;
+
+@use "../utils/styles-forwarded" as s;
+
+.badge {
+    @include s.badge-base();
+
+    color: s.$badge-clr;
+}
+
+.badge-completed {
+    background-color:  s.$completed;
+}
+
+.badge-ended {
+    background-color: s.$ended;
+}
+
+.badge-active {
+    background-color: s.$active;
+}
