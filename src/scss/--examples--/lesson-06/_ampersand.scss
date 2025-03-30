@@ -1,0 +1,63 @@
+.link {
+    color: black;
+    &:hover,
+    &:focus {
+        color: red;
+    }
+} //* &:hover and &:active are nested inside .link class - working with pseudo classes and pseudo elements of the element. */
+
+// .button {
+//     color: red;
+
+//     &:hover,
+//     &:focus {
+//         color: blue;
+//     }
+
+//     &-icon {
+//         width: 20px;
+//         height: 20px;
+
+//         &:hover {
+//             width: 50px;
+//             height: 50px;
+//         }
+
+//         .button:hover & {
+//             font-size: 20px;
+//         }
+//     } //* .button-icon is nested inside .button class - working with pseudo classes and pseudo elements of the element. Better not to use this way of nesting. It is better to use the class name directly. */
+// }
+
+.button {
+    background: {
+        color: teal;
+        position: center;
+        repeat: no-repeat;
+    } //* This is a nested property. It is not a class. It is a property of the class, which will be assempled in the CSS file.
+
+    color: red;
+
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: blue;
+    }
+}
+
+.button-icon {
+    font-size: 10px;
+
+    .button:hover & {
+        font-size: 30px;
+    } //* On hover of the button, the font size of the icon will be increased.
+}
+
+.button-label {
+    font-size: 16px;
+
+    .button:hover & {
+        font-size: 20px;
+    } //* Same as above. On hover of the button, the font size of the label will be increased.
+}

@@ -1,0 +1,12 @@
+.section {
+    width: 100%;
+
+    .title {
+        color: teal;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+}
+//* Can use nesting for writitng styles for child elements in a parent element (nested selector). Better for organization and readability.
