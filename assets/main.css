@@ -1,0 +1,53 @@
+.section {
+  width: 100%;
+}
+.section .title {
+  color: teal;
+}
+.section .text {
+  font-size: 14px;
+}
+
+ul > li {
+  list-style: none;
+}
+
+h2 + p {
+  border-top: 1px solid black;
+}
+
+p ~ span {
+  opacity: 0.8;
+}
+
+.link {
+  color: black;
+}
+.link:hover, .link:focus {
+  color: red;
+}
+
+.button {
+  background-color: teal;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: red;
+  cursor: pointer;
+}
+.button:hover, .button:focus {
+  color: blue;
+}
+
+.button-icon {
+  font-size: 10px;
+}
+.button:hover .button-icon {
+  font-size: 30px;
+}
+
+.button-label {
+  font-size: 16px;
+}
+.button:hover .button-label {
+  font-size: 20px;
+}
