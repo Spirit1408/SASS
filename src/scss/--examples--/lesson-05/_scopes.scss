@@ -1,0 +1,14 @@
+$background-color: teal;
+
+body {
+    $background-color: red; //? This will overwrite $background-color for this scope only
+    $color-secondary: white !global;
+    background-color: $background-color;
+}
+
+p {
+    $padding: 5px;
+    padding: $padding;
+    background-color: $background-color;
+    color: $color-secondary; //! This will not work because $color-secondary is not defined in this scope, until it is not declared as !global in the body scope
+}

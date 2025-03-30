@@ -1,0 +1,26 @@
+//* Separator in names can be used in "kebab-case" style
+//? $color-primary-text: #888;
+//? $color-blue-text: lightblue;
+
+//* Separator in names can be used in "camelCase" style
+//? $colorPrimaryText: #888;
+//? $colorBlueText: lightblue;
+
+//* Separator in names can be used in "snake_case" style
+//? $color_primary_text: #888;
+//? $color_blue_text: lightblue;
+
+//! Should be used only one, selected, style of naming variables in the project!
+
+$font-size: 16px;
+
+.title {
+    font-size: $font-size;
+}
+
+$font-size: 10px;
+
+.subtitle {
+    font-size: $font-size;
+}
+//* Order of variables in the file is important! It will be applied from top to bottom. In this example, the subtitle will be 10px, not 16px, but title will be 16px, depending on the order of the variables in the file.

@@ -1,0 +1,19 @@
+@use "sass:math"; //? Import from sass math module for calculations
+
+@use "btn-schema" as vars with (
+    $font-size: 20px, //? Overwrite variable
+    $btn-color: black,
+    $btn-bgcolor: lightblue,
+);
+
+.small-btn {
+    font-size: vars.$font-size;
+    color: vars.$btn-color;
+    background-color: vars.$btn-bgcolor;
+    border-radius: vars.$btn-border-radius;
+    border: vars.$btn-border;
+    padding: vars.$btn-padding;
+    cursor: pointer;
+}
+
+@debug math.$pi; //? Debug shows requested info in the console => 3.141592653589793.
