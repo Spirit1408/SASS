@@ -1,0 +1,38 @@
+//? Check on result css (index.css)
+.box {
+    width: 600px + 20px;
+    width: 600px - 20px;
+    //! width: 600px + 20%; - not valid (incopatible units)
+    //! width: 600px - 20%; - not valid (incopatible units)
+    width: calc(600px + 20%);
+    width: calc(600px - 20%);
+}
+
+//* Multiply and divide
+$value: 600px;
+
+.box {
+    width: 600px * 2;
+    //! width: 600px * 2px; - not valid (px * px)
+    width: 600px * 2 + 50px;
+    width: (600px + 50px) * 2;
+
+    width: $value / 5;
+    //! width: $value / 3px; - not valid (px / px)
+    width: (600px / 5); //! Won`t work without brackets! - 600px/5 as a result
+    width: 600px / 5px + 10px; //* 600px/5px = 120. 120 + 10px = 130px.
+}
+
+//* Interpolation
+$name: "newBox";
+$margin: 100px;
+
+.box {
+    margin: $margin * 2;
+    margin: calc(#{$margin} * 2); //* Input a value to the result expression
+}
+
+.#{$name} {
+    margin: $margin * 5;
+    margin: calc($margin * 5); //* Calculates an expression on site
+} //* Using interpolation can insert a value of the variable as a selector`s name

@@ -1,0 +1,95 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2c2932;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.task {
+    display: flex;
+    gap: 100px;
+    padding: 15px;
+    color: #b5b5be;
+    border-radius: 15px;
+    background-color: #1A1920;
+
+    h3 {
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .date {
+        margin-bottom: 15px;
+    }
+
+    span {
+        color: #fff;
+        font-weight: 900;
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .avatar {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: #ffffff;
+    }
+}
+
+.task-badges {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.badge-info {
+    color: #b5b5be;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    text-align: right;
+}
+
+.badge {
+    min-width: 96px;
+    padding: 4px 8px;
+
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.07px;
+
+    border-radius: 20px;
+    background-color: #92929d;
+}
+
+$status: (
+    "completed": #a461d8,
+    "ended": #fc5a5a,
+    "active": #82c43c,
+); //* Creating map with statuses
+
+@each $status-name, $color in $status {
+    .badge-#{$status-name} {
+        background-color: $color;
+    }
+} //* Creating selectors for each status. Each - iterations of the map.
