@@ -1,0 +1,117 @@
+//* Approach 1
+// .notification {
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+
+//   width: 480px;
+//   padding: 20px;
+
+//   font-family: Montserrat;
+//   color: #fafafb;
+//   font-size: 16px;
+//   line-height: 20px;
+//   letter-spacing: 0.5px;
+
+//   background-color: #92929d;
+//   border-radius: 6px;
+// }
+
+// .notification-primary {
+//   background-color: #f07f2e;
+// }
+
+// .notification-success {
+//   background-color: #82c43c;
+// }
+
+// .notification-info {
+//   background-color: #4e75ff;
+// }
+
+//* Approach 2
+
+// .notification {
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+
+//   width: 480px;
+//   padding: 20px;
+
+//   font-family: Montserrat;
+//   color: #fafafb;
+//   font-size: 16px;
+//   line-height: 20px;
+//   letter-spacing: 0.5px;
+
+//   background-color: #92929d;
+//   border-radius: 6px;
+// }
+
+// .notification-primary {
+//   @extend .notification;
+//   background-color: #f07f2e;
+// }
+
+// .notification-success {
+//   @extend .notification;
+//   background-color: #82c43c;
+// }
+
+// .notification-info {
+//   @extend .notification;
+//   background-color: #4e75ff;
+// } //? Not reccommended, especially when there are a lot of inner classes. Can cause an "selector explosion" in resulted css file.
+
+//* Approach 3
+
+%notification {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    width: 480px;
+    padding: 20px;
+
+    font-family: Montserrat;
+    color: #fafafb;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+
+    background-color: #92929d;
+    border-radius: 6px;
+
+    @media screen and (min-width: 768px) {
+        padding: 30px;
+    } //! Media rules for changing styles of the placeholder can be used in this way, or in media rules in extended classes, but not in the outer media rules. Forbidden to initiate placeholders inside of the media rules.
+} //? Using as a placeholder (template). In this case class .notification (which is not being used direcly anyway) won`t be added to the final main.css, but styles of this placeholder will be used in additional classes as an extension.
+
+.notification-primary {
+    @extend %notification;
+
+    background-color: #f07f2e;
+
+    @media screen and (min-width: 768px) {
+        padding: 50px;
+    } //* Also correct
+}
+
+.notification-success {
+    @extend %notification;
+
+    background-color: #82c43c;
+}
+
+.notification-info {
+    @extend %notification;
+
+    background-color: #4e75ff;
+}
+
+// @media screen and (min-width: 768px) {
+//   .notification-primary {
+//     padding: 30px;
+//   }
+// } //! Error!

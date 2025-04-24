@@ -12,5 +12,9 @@
 // @use "--examples--/lesson-06/combinators";
 // @use "--examples--/lesson-06/ampersand";
 
-@use "--examples--/lesson-07/math";
-@use "--examples--/lesson-07/task-badge";
+// @use "--examples--/lesson-07/math";
+// @use "--examples--/lesson-07/task-badge";
+
+@use "components/alert";
+@use "--examples--/lesson-08/base";
+@use "--examples--/lesson-08/extend";
