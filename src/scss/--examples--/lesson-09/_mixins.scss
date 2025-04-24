@@ -1,0 +1,178 @@
+//* -- Intro  --
+
+// %size {
+//     width: 70px;
+//     height: 70px;
+// }
+
+//* Mixin - directive for applying some similar CSS rules for several elements, which might have different values, which can be sended to mixin as parameters. Placeholder - template for applying styles with the same values to several elements.
+
+// @mixin frame-size($width, $height: $width) {
+//     width: $width;
+//     height: $height;
+
+//     border-radius: 50%;
+// } //* Example of mixin for setting specific width and height of an element.
+
+// .avatar {
+//     @include frame_size(100px);
+//     @extend %size; //* mixin has higher priority than placeholder
+
+//     background: transparent;
+// } //* Using mixin for setting specific width and height (100px) of an element .avatar by applying mixin through usage of @include directive. Striclly recommended to separate usage of mixin from the rest of css styles by adding empty row.
+
+// .icon {
+//     @include frame-size(50px);
+
+//     border: 1px solid black;
+// }
+
+//? Naming of mixin with - or _ can be counted as the same name and won`t cause an error (but still better to use the same writing name as for declaration of the mixin, as for its usage).
+
+// .frame {
+//     @extend %size;
+//     padding: 20px;
+// }
+
+//* -- No arguments--
+
+// @mixin position-center {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+// } //* Current mixin doesn`t reqire any arguments, so usage of curly brackets can be omitted (usage as a template).
+
+// .decoration {
+//     @include position-center;
+
+//     background-color: black;
+// }
+
+//* -- With arguments--
+
+// @mixin position($pos-type, $pos-x, $pos-y, $offset-x, $offset-y) {
+//     position: $pos-type;
+//     top: $pos-y;
+//     left: $pos-x;
+//     transform: translate($offset-x, $offset-y);
+// } //* Order of arguments is important!
+
+// .decoration-upd {
+//     @include position(fixed, 30%, 20%, -30%, -20%); //* All the arguments here are requiredso if one of them is missing, it will cause an error.
+
+//     background-color: black;
+// }
+
+//* -- Optional arguments --
+
+// @mixin position(
+//     $layer-index,
+//     $pos-type: absolute,
+//     $pos-x: 50%,
+//     $pos-y: $pos-x,
+//     $offset-x: -$pos-x,
+//     $offset-y: $offset-x
+// ) {
+//     position: $pos-type;
+//     top: $pos-y;
+//     left: $pos-x;
+//     transform: translate($offset-x, $offset-y);
+//     z-index: $layer-index;
+// } //* Is this case optinal arguments - arguments with its default values. These parameters should always goes after required arguments (if such arguments are required in the mixin). As values are repeated, it`s possible to use the value of one as a default value for another (as we did with $pos-y, $offset-x and $offset-y).
+
+// .decoration-upd {
+//     @include position(1000);
+
+//     background-color: black;
+// } //* We set layer index to 1000, as only this parameter is required. The rest can be omitted and values will be set by default.
+
+//* -- Keyword arguments --
+
+// .decoration-upd {
+//     @include position(
+//         100,
+//         $offset-y: -30%,
+//         $pos-x: -70%,
+//         $pos-y: -30%,
+//         $offset-x: -70%
+//     );
+// } //* In this example we can change an order of arguments in call without causing an error, by using arguments by their keywords.
+
+// %btn {
+//     display: inline-flex;
+//     font-family: Montserrat;
+//     font-size: 14px;
+//     font-weight: 500;
+//     line-height: 20px;
+//     letter-spacing: 0.5px;
+//     color: #fafafb;
+
+//     background-color: #f07f2e;
+//     border: none;
+//     cursor: pointer;
+//     transition: 300ms;
+
+//     &:hover,
+//     &:focus {
+//         background-color: #f15c27;
+//         box-shadow: 0px 4px 10px 0px rgba(240, 127, 46, 0.25);
+//     }
+// } //* %btn is a placeholder for buttons, which can be used in other styles.
+
+// @mixin btn-size($args...) {
+//     @for $i from 1 through length($args) {
+//         #{nth($args, $i)} {
+//             @extend %btn;
+
+//             $factor: ($i * 4 - 4);
+
+//             padding: 4px + $factor 8px + $factor;
+//             border-radius: 8px + $factor;
+//         }
+//     }
+// } //* $args... is a list of arguments, which can be iterated. For it we can use cycle @for and create a selector with some standart attributes, but different values, based on some formula (like here, in this example, values based on variable $factor, which based on the number of iteration). nth(list, index) returns a value of an item from the list by its index.
+
+// @include btn-size(".btn-sm", ".btn-md", ".btn-lg", ".btn-xl"); //* Using mixin with list of arguments. Using %btn as a main template of style and callig mixin for creating different sizes of buttons, based on some formula.
+
+//* -- Extending of usage of the keyword arguments --
+
+// @use "sass:meta";
+
+// @mixin btn-type($types...) {
+// $types: (
+//     $success: lightgreen,
+//     $error: tomato,
+//     $info: lightblue
+// ) //* map of styles (example)
+
+//     @each $name, $color in meta.keywords($types) {
+//         .btn-#{$name} {
+//             border: 2px solid $color;
+//             color: $color;
+//         }
+//     }
+// } //* meta.keywords() returns a map of arguments and their values, which also can be iterated.
+
+// @include btn-type(
+//     $success: lightgreen,
+//     $error: tomato,
+//     $info: lightblue
+// ); //* Using mixin with map of styles. Will create three selectors with different colors. Names of selectors and colors will be taken from the list of arguments (map of styles).
+
+//* -- @content directive --
+
+@mixin hover ($state) {
+    &:not([#{$state}]):hover {
+        @content;
+    }
+} //* if parent`s element isn`t disabled and hovered - apply some content (works like Outlet for included routes or {children} in React prompts).
+
+.button {
+    background-color: #fff;
+    border: 1px solid darkblue;
+
+    @include hover ($state: disabled) {
+        background-color: blue;
+    }
+} //* Using mixin with @content directive. If parent`s element isn`t disabled and hovered - apply styles, described in @content (curly brackets).
