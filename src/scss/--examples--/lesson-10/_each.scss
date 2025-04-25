@@ -1,0 +1,22 @@
+//* @each will complete the actions to each element in the list (or map)
+
+$sizes: 8, 16, 32; //* sample of list
+
+@each $size in $sizes {
+    .p-#{$size} {
+        padding: #{$size}px;
+    }
+} //* Creating selectors for each size. On each iteration - new selector (p-8, p-16, p-32) with equivalent paddings.
+
+$spaces: (
+    "sm": 24,
+    "md": 32,
+    "lg": 36,
+    "xl": 48,
+); //* sample of map
+
+@each $key, $value in $spaces {
+    .margin-#{$key} {
+       margin: #{$value}px;
+    }
+} //* Creating selectors for each size. On each iteration - new selector (margin-sm, margin-md, margin-lg) with equivalent margins. Recommended to use variables with names "key" and "value", but can be any.

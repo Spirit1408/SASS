@@ -1,0 +1,27 @@
+//* @for - cycle for iterations, but has more flexible than @each because of using indexes (counter of cycle).
+
+$base-weight: 400;
+
+@for $i from 0 through 3 {
+    .fw-#{$base-weight + $i * 100} {
+        font-weight: $base-weight + $i * 100;
+    }
+} //* Through - from 0 to 3 (includes 3). Creates 4 selectors fw-400, fw-500, fw-600, fw-700 with equivalent font-weight values.
+
+//* Diffetence between "through" and "to"
+// @for $i from 0 to 3 {
+//   some code
+// } //* To - from 0 to 3 (but not includes 3)
+
+// @for $_ from 0 through 3 {
+//     @debug $_;
+// } //* Debug shows numbers from 0 to 3 - checks amount of iterations
+
+//* @while
+
+$n: 0;
+
+@while $n < 3 {
+    @debug $n;
+    $n: $n + 1;
+} //* 0, 1, 2. This cycle haven`t being used in practice because this cycle cannot be stopped, less flexible than @for.
