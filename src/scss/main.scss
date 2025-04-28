@@ -22,8 +22,11 @@
 // @use "base/fonts";
 // @use "--examples--/lesson-09/mixins";
 
-@use "base/fonts";
-@use "components/button";
-@use "--examples--/lesson-10/if";
-@use "--examples--/lesson-10/each";
-@use "--examples--/lesson-10/for";
+// @use "base/fonts";
+// @use "components/button";
+// @use "--examples--/lesson-10/if";
+// @use "--examples--/lesson-10/each";
+// @use "--examples--/lesson-10/for";
+
+@use "--examples--/lesson-11/examples";
+@use "--examples--/lesson-11/functions";

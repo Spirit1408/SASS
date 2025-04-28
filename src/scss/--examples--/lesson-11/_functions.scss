@@ -1,0 +1,58 @@
+//* As in JS - finctions are used for creating some repetative actions, which can be applied anywhere and as many times - as it might be necessary (f.e. to prevent writing the same algorythm of some procedure in different mixins (DRY principle)).
+
+// @function strip-unit($value) {
+//     @return $value;
+// } //* Sample of some function.
+
+// @debug strip-unit(5px); //* Sample of calling the function
+
+//* ---------------------------
+
+//* Will create a function for deleting the unit from the value (5px -> 5). 
+
+// @function strip-unit($value) {
+//     @return $value / ($value * 0 + 1);
+// } //* We have 10px as a $value. Operation 10px * 0 + 1 will return 1px (10px * 0 = 0px, 0px + 1 = 1px). 10px / 1px = 10. In the same way function can work with other units (px, em, rem, %, etc.), because we will always divide original value on its copy with the same unit.
+
+// @debug strip-unit(10rem); //* returns 10
+
+//* ---------------------------
+
+// @use "sass:math";
+
+// @function strip-unit($value) {
+//     @if type-of($value) != "number" {
+//         @warn "Argument must be a number.";
+//     }
+
+//     @if type-of($value) == "number" and not unitless($value) {
+//         @return math.div($value, $value * 0 + 1); 
+//     }
+
+//     @return $value;
+// } //* Same function, but with more strict conditions (if $value is number and not unitless, then applying function, otherwise return $value). Math.div() is a function from sass math module for calculation. If value is not a number, an error will be thrown.
+
+// @debug strip-unit(150em); //* returns 150
+// @debug strip-unit(150); //* returns 150
+// @debug strip-unit(dsfsdfsd); //* Error: "Argument must be a number."
+
+//* ---------------------------
+
+@use "sass:math";
+@use "decimal" as *;
+
+@function strip-unit($value) {
+    @if type-of($value) != "number" {
+        @error "Argument must be a number.";
+    }
+
+    @if type-of($value) == "number" and not unitless($value) {
+        @return math.div($value, $value * 0 + 1); 
+    }
+
+    @return $value;
+} //* Using the same function as above, but in other files.
+
+@function rem($px-value, $base-font-size: 16px){
+    @return #{decimal-round(math.div(strip-unit($px-value), strip-unit($base-font-size)), 2)}rem; 
+} //* Function for converting px to rem (using decimal-round for rounding the result).

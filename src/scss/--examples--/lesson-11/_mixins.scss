@@ -1,0 +1,34 @@
+@use "decimal" as *; //* import of decimal-round function
+@use "functions" as *; //* import of strip-unit function
+
+@mixin fonts($fs, $fw: null, $lh: null, $ls: null, $align: null) {
+  @if $fs {
+    font-size: $fs;
+  }
+
+  @if $fw {
+    font-weight: $fw;
+  }
+
+  @if $lh {
+    @if $lh == normal {
+      line-height: normal;
+    } @else {
+      $lh: calc(strip-unit($lh) / strip-unit($fs));
+      line-height: decimal-round($lh, 2);
+    }
+  } //* If $lh is normal, then line-height will be normal. If $lh is not normal, then we will calculate line-height (lh and fs will be without units). And then we will round it to 2 digits after floating comma.
+
+  @if $ls {
+    @if $ls == normal {
+      letter-spacing: normal;
+    } @else {
+      $ls: calc(strip-unit($ls) / strip-unit($fs));
+      letter-spacing: #{decimal-round($ls, 2)}em;
+    }
+  } //* If $ls is normal, then letter-spacing will be normal. If $ls is not normal, then we will calculate letter-spacing (ls and fs will be without units). And then we will round it to 2 digits after floating comma, but it will be in em.
+
+  @if $align {
+    text-align: $align;
+  }
+}
