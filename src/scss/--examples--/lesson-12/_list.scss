@@ -1,0 +1,44 @@
+@use "sass:list"; //* For using list functions
+
+$number: 12;
+$string: "grid";
+$boolean: false;
+$empty: null;
+
+$list: 8, 10, 12, 14, 16; //* list of numbers (with comma separator)
+
+$list: 1px solid red; //* list of strings (with space separator)
+
+$numbers: 10px, 12px, 16px;
+@debug list.nth(
+    $numbers,
+    2
+); //* returns 12px - first argument of list.nth() is a list, second argument is an index of item in the list. Can be used in a cycle.
+
+$colors: lightgreen, tomato, lightblue;
+@debug list.length($colors); //* returns 3 - amount of items in the list
+
+$sizes: 40px, 60px, 70px;
+@each $size in $sizes {
+    .icon-#{$size} {
+        width: $size;
+        height: $size;
+        font-size: $size;
+    }
+} //* example of usage of @each directive with list
+
+$button-types: ".btn-sm", ".btn-md", ".btn-lg", ".btn-xl", ".btn-xxl";
+@mixin btn-size($types) {
+    @for $i from 1 through list.length($types) {
+        #{list.nth($types, $i)} {
+            $factor: $i * 5 - 5;
+
+            padding: 5px + $factor 10px + $factor;
+            border-radius: 10px + $factor;
+        }
+    }
+} //* Example of usage of @for directive with list
+
+@include btn-size($button-types); //* Using mixin with list of arguments
+
+//? All the lists im SASS are immutable!
