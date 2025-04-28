@@ -1,0 +1,6 @@
+@use "colors" as c; //* Import everythimg from colors file
+
+.button {
+    color: c.get-color("primary");
+    background-color: c.get-color("background");
+} //* Using get-color function from colors to get and apply a proper color

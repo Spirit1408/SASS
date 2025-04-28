@@ -1,0 +1,13 @@
+$types: (
+    "primary": #f07f2e,
+    "success": #82c43c,
+    "danger": #fc5a5a,
+    "warning": #a461d8,
+    "info": #4e75ff,
+); //* map of colors (example)
+
+@each $key, $value in $types {
+    .alert-#{$key} {
+        background-color: $value;
+    }
+} //* Creating selectors for each color using @each directive. Each iteration - new selector (alert-primary, alert-success, alert-danger, alert-warning, alert-info) with equivalent colors.

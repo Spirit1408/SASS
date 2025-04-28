@@ -1,0 +1,28 @@
+@use "sass:map"; //* Import from sass map module for operating with maps
+
+$color-primary: #8e3329;
+$color-accent: #d98328;
+$color-secondary: #5a1321;
+$color-foreground: #191919;
+$color-background: #e9e9e9;
+//? Different colors without any links between them. But we can put them together in one map
+
+$colors: (
+    "primary": $color-primary,
+    "accent": $color-accent,
+    "secondary": $color-secondary,
+    "foreground": $color-foreground,
+    "background": $color-background,
+); //* map of colors from above
+
+body {
+    background-color: map.get($colors, "background");
+} //* Using map.get() for getting a specific value from the map. First argument - map, second - specific key of the map.
+
+@function get-color($color) {
+    @return map.get($colors, $color);
+} //* Creating a function for getting a specific color from the map $colors.
+
+body {
+    background-color: get-color("background");
+} //* Using that function
